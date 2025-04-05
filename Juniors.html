@@ -219,10 +219,8 @@
         body: new URLSearchParams({ textInput: confession }),
         mode: "no-cors"
       })
-      .then(() => {
-        submitBtn.disabled = true;
-        textInput.disabled = true;
-        thankYouMsg.style.display = "block";
+    .then(() => {
+        window.location.href = "thankyou.html";
       })
       .catch((error) => {
         console.error("Submission error:", error);
