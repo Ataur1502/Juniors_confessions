@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Anonymous Confessions</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0c0a09;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    .confession {
+      background: #1a1a1a;
+      border-left: 4px solid #ff7b00;
+      margin: 20px auto;
+      padding: 15px 25px;
+      width: 80%;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(255, 123, 0, 0.3);
+    }
+  </style>
+</head>
+<body>
+  <h1>Anonymous Confessions 🔐</h1>
+  <div id="confessionList">Loading...</div>
+
+  <script>
+    fetch("https://opensheet.elk.sh/1TH4Y-_ziifO01XpXcogRWXDDFIS8H3WanLrpfsySiqc/Sheet1")
+      .then((res) => res.json())
+      .then((data) => {
+        const list = document.getElementById("confessionList");
+        list.innerHTML = "";
+        data.reverse().forEach(item => {
+          if (item.Confession && item.Confession.trim() !== "") {
+            const div = document.createElement("div");
+            div.className = "confession";
+            div.innerText = item.Confession;
+            list.appendChild(div);
+          }
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+        document.getElementById("confessionList").innerText = "Failed to load confessions 😢";
+      });
+  </script>
+</body>
+</html>
